@@ -7,10 +7,15 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 
 import Home from "./pages/Home";
 import "./App.css";
+
+const client = new ApolloClient({
+  uri: "https://kettlecat-graphql.herokuapp.com/graphql"
+});
 
 const styles = {
   root: {
@@ -29,6 +34,7 @@ const App = props => {
   const { classes } = props;
   return (
     <div id="container">
+    <ApolloProvider client={client}>
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
@@ -48,6 +54,7 @@ const App = props => {
           <Route exact path="/" component={Home} />
         </Switch>
       </Router>
+      </ApolloProvider>
     </div>
   );
 };

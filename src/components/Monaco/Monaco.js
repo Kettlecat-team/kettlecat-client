@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
 import LanguageButton from "../LanguageButton";
 class Monaco extends React.Component {
-    constructor() {
+    constructor(props) {
       super();
       this.state ={
         code: "//type code here",
@@ -34,6 +34,7 @@ class Monaco extends React.Component {
           onChange={this.onChange.bind(this)}
           editorDidMount={this.editorDidMount.bind(this)}
         />
+        <div>{this.props.data.chakiboos[0].title}</div>
         <div className="menu">
           <label>Languages</label>
             <select className="langMenu">
