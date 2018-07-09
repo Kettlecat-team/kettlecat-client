@@ -7,7 +7,6 @@ class Monaco extends React.Component {
       super();
       this.state ={
         code: "//type code here",
-        showMenu: false,
       }
     }  
   
@@ -35,7 +34,7 @@ class Monaco extends React.Component {
           onChange={this.onChange.bind(this)}
           editorDidMount={this.editorDidMount.bind(this)}
         />
-        <div className="langMenu">
+        <div className="menu">
           <label>Languages</label>
             <select className="langMenu">
               <option>bat</option>
