@@ -20,7 +20,7 @@ class Home extends Component {
         {({ loading, error, data }) => {
           if (loading) return <div>Loading...</div>;
           if (error) return <div>Error :(</div>;
-          return <Monaco data={data} />;
+          return <div></div>
         }}
       </Query>
     );

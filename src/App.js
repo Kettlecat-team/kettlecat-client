@@ -12,6 +12,7 @@ import { ApolloProvider } from "react-apollo";
 
 import Home from "./pages/Home";
 import "./App.css";
+import ChakibooCreator from "./pages/ChakibooCreator/ChakibooCreator";
 
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql"
@@ -52,6 +53,7 @@ const App = props => {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/creator" component={ChakibooCreator} />
         </Switch>
       </Router>
       </ApolloProvider>

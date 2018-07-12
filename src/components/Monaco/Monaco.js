@@ -34,7 +34,7 @@ class Monaco extends React.Component {
           onChange={this.onChange.bind(this)}
           editorDidMount={this.editorDidMount.bind(this)}
         />
-        <div>{this.props.data.chakiboos[0].title}</div>
+        <div>{/* /* {this.props.data.chakiboos[0].title} * */}/</div>
         <div className="menu">
           <label>Languages</label>
             <select className="langMenu">
