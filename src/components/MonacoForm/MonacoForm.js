@@ -23,6 +23,8 @@ class MonacoForm extends Component {
 
   
   handleChange(event) {
+    event.preventDefault();
+    
     let value = event.target.value;
     const name= event.target.name;
 
