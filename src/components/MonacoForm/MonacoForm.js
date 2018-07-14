@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 /* import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -10,58 +10,67 @@ import Monaco from '../Monaco';
 import TextField from '@material-ui/core/TextField'; */
 import Monaco from "../Monaco";
 
-class MonacoForm extends Component {
-   constructor(props){
-    super(props);
-    this.state= {
-      title:"",
-      description:"",
-    };
-    this.handleChange= this.handleChange.bind(this);
-    this.handleSubmit= this.handleSubmit.bind(this);
-  } 
+const parseTags = description => {
+  const hashtagRegExp = /(^|\W)(#[a-z\d][\w-]*)/gi;
+  description.match(hashtagRegExp).map(value => value.substr(2));
+};
 
-  
+class MonacoForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      description: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleChange(event) {
     event.preventDefault();
-    
+
     let value = event.target.value;
-    const name= event.target.name;
+    const name = event.target.name;
 
     this.setState({
-      [name]:value
+      [name]: value
     });
   }
   handleSubmit(event) {
     event.preventDefault();
-    alert("Title is: " + this.state.title + ". And the description is: " + this.state.description);
+    alert(
+      "Title is: " +
+        this.state.title +
+        ". And the description is: " +
+        this.state.description
+    );
   }
 
-  render(){
+  render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <Monaco />
         <label>
           Title:
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="title"
-            value={this.state.title} 
-            onChange={this.handleChange} 
+            value={this.state.title}
+            onChange={this.handleChange}
           />
         </label>
         <label>
           Description:
-          <input 
-            type= "text"
+          <input
+            type="text"
             name="description"
-            value={this.state.description} 
-            onChange={this.handleChange} 
+            value={this.state.description}
+            onChange={this.handleChange}
           />
         </label>
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Submit" />
       </form>
-    )
+    );
   }
 }
 
