@@ -10,17 +10,18 @@ import Monaco from '../Monaco';
 import TextField from '@material-ui/core/TextField'; */
 import Monaco from "../Monaco";
 
-const parseTags = description => {
+/* const parseTags = description => {
   const hashtagRegExp = /(^|\W)(#[a-z\d][\w-]*)/gi;
   description.match(hashtagRegExp).map(value => value.substr(2));
-};
-
+  console.log(hashtagRegExp);
+}; */
 class MonacoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: "",
-      description: ""
+      description: "",
+      tags: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +29,10 @@ class MonacoForm extends Component {
 
   handleChange(event) {
     event.preventDefault();
+    /* let tags = this.state.description;
 
+    console.log(tags);  */
+    
     let value = event.target.value;
     const name = event.target.name;
 
@@ -38,11 +42,19 @@ class MonacoForm extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    
+    let descriptionFull = this.state.description;
+
+    if (descriptionFull.indexOf('#') >=0) {
+      let parsedTags = descriptionFull.match(/(^|\W)(#[a-z\d][\w-]*)/gi).map(value => value.substr(2));
+      console.log(parsedTags);
+    }
+   
     alert(
       "Title is: " +
         this.state.title +
         ". And the description is: " +
-        this.state.description
+        this.state.description 
     );
   }
 

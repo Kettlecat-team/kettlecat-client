@@ -9,13 +9,17 @@ class Monaco extends React.Component {
         code: "//type code here",
       }
     }  
-  
+    
     editorDidMount(editor, monaco) {
       console.log('editorDidMount', editor);
       editor.focus();
     }
     onChange(newValue, e) {
-      console.log('onChange', newValue, e);
+      
+      this.setState({ 
+        code: this.state.value
+      })
+      console.log(this.state);
     }
     render() {
       const code = this.state.code;
@@ -24,19 +28,21 @@ class Monaco extends React.Component {
       };
       return (
         <div>
-        <MonacoEditor
-          width="800"
-          height="600"
-          language="javascript"
-          theme="vs-dark"
-          value={code}
-          options={options} 
-          onChange={this.onChange.bind(this)}
-          editorDidMount={this.editorDidMount.bind(this)}
-        />
-        <div>{/* /* {this.props.data.chakiboos[0].title} * */}/</div>
-        <div className="menu">
-          <label>Languages</label>
+          <MonacoEditor
+            width="800"
+            height="600"
+            language="javascript"
+            theme="vs-dark"
+            value={this.state.code}
+            options={options} 
+            onChange={this.onChange.bind(this)}
+            editorDidMount={this.editorDidMount.bind(this)}
+          />
+          <div> 
+          
+          </div>
+          <div className="menu">
+            <label>Languages</label>
             <select className="langMenu">
               <option>bat</option>
               <option>c</option>
@@ -85,9 +91,6 @@ class Monaco extends React.Component {
               <option>yaml</option>
             </select>
           </div>
-       {/*  <LanguageButton 
-          
-        /> */}
         </div>
       );
     }

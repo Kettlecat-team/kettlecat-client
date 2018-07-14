@@ -8,6 +8,7 @@
     "apollo-boost": "^0.1.10",
     "graphql": "^0.13.2",
     "monaco-editor": "^0.13.1",
+    "monaco-editor-webpack-plugin": "^1.4.0",
     "react": "^16.4.1",
     "react-apollo": "^2.1.9",
     "react-dom": "^16.4.1",
