@@ -33,9 +33,9 @@ class Monaco extends React.Component {
             height="600"
             language="javascript"
             theme="vs-dark"
-            value={this.state.code}
+            value={this.props.code}
             options={options} 
-            onChange={this.onChange.bind(this)}
+            onChange={this.props.handleCodeChange}
             editorDidMount={this.editorDidMount.bind(this)}
           />
           <div> 

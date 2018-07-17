@@ -18,9 +18,18 @@ class ChakibooCreator extends Component {
         const name = event.target.name;
     
         this.setState({
-          [name]: value
+          [name]: value,
         });
     };
+
+    handleCodeChange(event) {
+
+        const value = event.target.value;
+      
+        this.setState({ 
+          code: value
+        })
+      };
     handleSubmit = event => {
         event.preventDefault();
     
@@ -36,7 +45,7 @@ class ChakibooCreator extends Component {
             "Title is: " +
               this.state.title +
               ". And the description is: " +
-              this.state.description + "the hash is " + parsedTags
+              this.state.description + "the hash is " + parsedTags + "the code is: " + this.state.code
           );
         } else{
             alert(
@@ -52,7 +61,7 @@ class ChakibooCreator extends Component {
     render() {
         return (
             <div>
-                <Monaco />
+                <Monaco code={this.state.code} handleChange={this.handleCodeChange}/>
                 <MonacoForm 
                     handleChange = {this.handleChange}
                     handleSubmit = {this.handleSubmit}

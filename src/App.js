@@ -50,6 +50,9 @@ const App = props => {
           </Toolbar>
         </AppBar>
       </div>
+
+      
+
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
