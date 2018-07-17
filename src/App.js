@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import "./App.css";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import LoginContext from "./contexts/LoginContext";
 
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql"
@@ -35,8 +36,16 @@ const styles = {
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.toggleLogin = () => {
+      this.setState(state => ({
+        isLogged: !state.isLogged
+      }));
+    };
+
     this.state = {
-      isLogged: false
+      isLogged: false,
+      toggleLogin: this.toggleLogin
     };
   }
 
@@ -44,38 +53,39 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <div id="container">
-        <ApolloProvider client={client}>
-          <Router>
-            <div>
-              <div className={classes.root}>
-                <AppBar position="static">
-                  <Toolbar>
-                    <Typography
-                      variant="title"
-                      color="inherit"
-                      className={classes.flex}
-                    >
-                      <Link to="/">Kettlecat</Link>
-                    </Typography>
+        <LoginContext.Provider value={this.state}>
+          <ApolloProvider client={client}>
+            <Router>
+              <div>
+                <div className={classes.root}>
+                  <AppBar position="static">
+                    <Toolbar>
+                      <Typography
+                        variant="title"
+                        color="inherit"
+                        className={classes.flex}
+                      >
+                        <Link to="/">Kettlecat</Link>
+                      </Typography>
+                      <Button color="inherit">
+                        <Link to="/login">Login</Link>
+                      </Button>
+                      <Button color="inherit">
+                        <Link to="/signup">Sign Up</Link>
+                      </Button>
+                    </Toolbar>
+                  </AppBar>
+                </div>
 
-                    <Button color="inherit">
-                      <Link to="/login">Login</Link>
-                    </Button>
-                    <Button color="inherit">
-                      <Link to="/signup">Sign Up</Link>
-                    </Button>
-                  </Toolbar>
-                </AppBar>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/signup" component={SignUp} />
+                </Switch>
               </div>
-
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={SignUp} />
-              </Switch>
-            </div>
-          </Router>
-        </ApolloProvider>
+            </Router>
+          </ApolloProvider>
+        </LoginContext.Provider>
       </div>
     );
   }
