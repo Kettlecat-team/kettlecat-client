@@ -37,14 +37,16 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleLogin = () => {
+    this.toggleLogin = username => {
       this.setState(state => ({
-        isLogged: !state.isLogged
+        isLogged: !state.isLogged,
+        loggedUser: username
       }));
     };
 
     this.state = {
       isLogged: false,
+      loggedUser: "",
       toggleLogin: this.toggleLogin
     };
   }
@@ -67,6 +69,7 @@ class App extends Component {
                       >
                         <Link to="/">Kettlecat</Link>
                       </Typography>
+                      <Typography>{this.state.loggedUser}</Typography>
                       <Button color="inherit">
                         <Link to="/login">Login</Link>
                       </Button>

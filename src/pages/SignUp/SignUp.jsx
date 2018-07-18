@@ -3,6 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { Button } from "../../../node_modules/@material-ui/core";
 
+import LoginContext from "./../../contexts/LoginContext";
+
 const styles = theme => ({
   container: {
     display: "flex",
@@ -46,14 +48,14 @@ class SignUp extends Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = toggleLogin => {
     if (this.state.password === this.state.passwordConfirm) {
       let newUser = {
         username: this.state.username,
         password: this.state.password
       };
       postData(`https://kettlecat-graphql.herokuapp.com/register`, newUser)
-        .then(data => console.log(data)) // JSON from `response.json()` call
+        .then(data => toggleLogin(data)) // JSON from `response.json()` call
         .catch(error => console.error(error));
     } else {
       // TODO improve and maybe display a notification
@@ -93,7 +95,17 @@ class SignUp extends Component {
           autoComplete="current-password"
           margin="normal"
         />
-        <Button onClick={this.handleSubmit}>Sign Up</Button>
+        <LoginContext.Consumer>
+          {({ toggleLogin }) => (
+            <Button
+              onClick={() => {
+                this.handleSubmit(toggleLogin);
+              }}
+            >
+              Sign Up
+            </Button>
+          )}
+        </LoginContext.Consumer>
       </form>
     );
   }
