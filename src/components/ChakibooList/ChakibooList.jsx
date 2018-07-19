@@ -2,10 +2,7 @@ import React from "react";
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-
-
-
+import ChakibooListButtons from "./ChakibooListButtons";
 
 const styles = theme => ({
   root: {
@@ -19,16 +16,17 @@ const styles = theme => ({
 });
 
 const ChakibooList = (props) => {
-const {chakiboos} = props.data
+const {chakiboos} = props.data;
 const { classes } = props;
 
-  return ((chakiboos.map(({title, description, id}) =>(
+  return ((chakiboos.map(({title, description, id,}) =>(
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={6}>
           <Paper className={classes.paper}> 
             <div>{title} </div>
             <div>{description} </div>
+            <ChakibooListButtons/> 
          </Paper>
         </Grid>
       </Grid>
