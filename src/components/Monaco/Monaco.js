@@ -1,48 +1,74 @@
 import React from "react";
-import { render } from "react-dom";
-import MonacoEditor from "react-monaco-editor";
-import LanguageButton from "../LanguageButton";
-import { Controlled as CodeMirror } from "react-codemirror2";
+import CodeMirror from "react-codemirror";
 import "codemirror/lib/codemirror.css";
-import "codemirror/theme/material.css";
-require("codemirror/mode/xml/xml");
-require("codemirror/mode/javascript/javascript");
 
+
+let defaults = {
+  markdown: "//code",
+  javascript: "//code",
+}
 class Monaco extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      code: "//type code here"
-    };
-  }
+   constructor(props) {
+     super();
+   
+     this.state = {
+       name: "CodeMirror",
+       code: "//type code here",
+       mode: "javascript",
+       readOnly: false,
+     };
+   }
 
-  editorDidMount(editor, monaco) {
-    console.log("editorDidMount", editor);
-    editor.focus();
+  /* getInitialState () {
+		return {
+			code: defaults.markdown,
+			readOnly: false,
+			mode: 'markdown',
+		};
+	} */
+
+  // editorDidMount(editor, monaco) {
+  //   console.log("editorDidMount", editor);
+  //   editor.focus();
+  // }
+  changeMode = (e) => {
+    var mode = e.target.value;
+    console.log(mode);
+		this.setState({
+			mode: mode,
+			code: defaults[mode]
+		});
   }
-  onChange(newValue, e) {
+  
+  updateCode = (newCode) => {
     this.setState({
-      code: this.state.value
+      code: newCode
     });
-    console.log(this.state);
+   
   }
   render() {
-    const code = this.state.code;
-    const options = {
-      mode: "xml",
-      theme: "material",
-      lineNumbers: true
-    };
+    // const code = this.state.code;
+    // const options = {
+    //   mode: "xml",
+    //   theme: "material",
+    //   lineNumbers: true
+    // };
+    let options = {
+      lineNumbers: true,
+      
+    }
     return (
       <div>
-        <CodeMirror
-          value={this.state.value}
-          options={options}
-          onBeforeChange={(editor, data, value) => {
-            this.setState({ value });
-          }}
-          onChange={(editor, data, value) => {}}
-        />{" "}
+        <CodeMirror value={this.state.code} onChange={this.updateCode.bind(this)} options={options} />
+
+        <select 
+          onChange={this.changeMode}
+          value={this.state.mode}>
+          <option value="markdown">Markdown</option>
+          <option value="javascript">JavaScript</option>
+        </select>
+        
+        
         {/* <MonacoEditor
           width="800"
           height="600"

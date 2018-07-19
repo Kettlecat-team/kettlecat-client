@@ -1,1 +1,1 @@
-export {default} from "./codeMirror";
+export {default} from "./Codemirror";
