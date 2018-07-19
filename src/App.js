@@ -12,6 +12,7 @@ import { ApolloProvider } from "react-apollo";
 
 import Home from "./pages/Home";
 import "./App.css";
+import ChakibooCreator from "./pages/ChakibooCreator/ChakibooCreator";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
@@ -97,6 +98,7 @@ class App extends Component {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={SignUp} />
+                  <Route exact path="/creator" component={ChakibooCreator} />
                 </Switch>
               </div>
             </Router>
