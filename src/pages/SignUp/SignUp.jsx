@@ -25,6 +25,7 @@ const postData = (url = ``, data = {}) => {
   return fetch(url, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, cors, *same-origin
+    credentials: "include",
     headers: {
       "Content-Type": "application/json; charset=utf-8"
       // "Content-Type": "application/x-www-form-urlencoded",
@@ -50,7 +51,7 @@ class SignUp extends Component {
 
   handleSubmit = toggleLogin => {
     if (this.state.password === this.state.passwordConfirm) {
-      let newUser = {
+      const newUser = {
         username: this.state.username,
         password: this.state.password
       };

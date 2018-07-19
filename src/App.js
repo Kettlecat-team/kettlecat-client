@@ -51,6 +51,10 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    // fetch isUserAuthenticated?
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -69,13 +73,22 @@ class App extends Component {
                       >
                         <Link to="/">Kettlecat</Link>
                       </Typography>
-                      <Typography>{this.state.loggedUser}</Typography>
-                      <Button color="inherit">
-                        <Link to="/login">Login</Link>
-                      </Button>
-                      <Button color="inherit">
-                        <Link to="/signup">Sign Up</Link>
-                      </Button>
+                      <LoginContext.Consumer>
+                        {({ isLogged, loggedUser }) =>
+                          isLogged ? (
+                            <Typography>logged as {loggedUser}</Typography>
+                          ) : (
+                            <React.Fragment>
+                              <Button color="inherit">
+                                <Link to="/login">Login</Link>
+                              </Button>
+                              <Button color="inherit">
+                                <Link to="/signup">Sign Up</Link>
+                              </Button>
+                            </React.Fragment>
+                          )
+                        }
+                      </LoginContext.Consumer>
                     </Toolbar>
                   </AppBar>
                 </div>
