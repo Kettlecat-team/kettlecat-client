@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
 
 const styles = theme => ({
@@ -30,13 +29,13 @@ function IconLabelButtons(props) {
         Delete
         <DeleteIcon className={classes.rightIcon} />
       </Button>
-      <Button variant="contained" color="default" className={classes.button}>
-        Upload
-        <CloudUploadIcon className={classes.rightIcon} />
-      </Button>
       <Button variant="contained" size="small" className={classes.button}>
         <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
         Save
+      </Button>
+      <Button variant="contained" color="default" className={classes.button}>
+        Copy
+        <CloudUploadIcon className={classes.rightIcon} />
       </Button>
     </div>
   );

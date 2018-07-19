@@ -26,8 +26,9 @@ const { classes } = props;
           <Paper className={classes.paper}> 
             <div>{title} </div>
             <div>{description} </div>
-            <ChakibooListButtons/> 
+            <ChakibooListButtons/>
          </Paper>
+         
         </Grid>
       </Grid>
     </div>
