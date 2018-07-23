@@ -56,6 +56,18 @@ class App extends Component {
     // fetch isUserAuthenticated?
   }
 
+  handleLogout = () => {
+    fetch("https://kettlecat-graphql.herokuapp.com/logout", {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, cors, *same-origin
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+        // "Content-Type": "application/x-www-form-urlencoded",
+      }
+    });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -79,7 +91,12 @@ class App extends Component {
                           isLogged ? (
                             <React.Fragment>
                               <Typography>logged as {loggedUser}</Typography>
-                              <Button color="inherit">Logout</Button>
+                              <Button
+                                color="inherit"
+                                onClick={this.handleLogout}
+                              >
+                                Logout
+                              </Button>
                             </React.Fragment>
                           ) : (
                             <React.Fragment>
