@@ -77,7 +77,10 @@ class App extends Component {
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser }) =>
                           isLogged ? (
-                            <Typography>logged as {loggedUser}</Typography>
+                            <React.Fragment>
+                              <Typography>logged as {loggedUser}</Typography>
+                              <Button color="inherit">Logout</Button>
+                            </React.Fragment>
                           ) : (
                             <React.Fragment>
                               <Button color="inherit">
