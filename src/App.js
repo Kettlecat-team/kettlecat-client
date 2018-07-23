@@ -40,7 +40,7 @@ class App extends Component {
 
     this.toggleLogin = username => {
       this.setState(state => ({
-        isLogged: !state.isLogged,
+        isLogged: true,
         loggedUser: username
       }));
     };
@@ -64,6 +64,10 @@ class App extends Component {
       headers: {
         "Content-Type": "application/json; charset=utf-8"
         // "Content-Type": "application/x-www-form-urlencoded",
+      }
+    }).then(response => {
+      if (response.ok === true) {
+        this.setState({ isLogged: false, loggedUser: "" });
       }
     });
   };
