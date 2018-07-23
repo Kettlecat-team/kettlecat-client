@@ -40,7 +40,7 @@ class App extends Component {
 
     this.toggleLogin = username => {
       this.setState(state => ({
-        isLogged: !state.isLogged,
+        isLogged: true,
         loggedUser: username
       }));
     };
@@ -55,6 +55,22 @@ class App extends Component {
   componentDidMount() {
     // fetch isUserAuthenticated?
   }
+
+  handleLogout = () => {
+    fetch("https://kettlecat-graphql.herokuapp.com/logout", {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, cors, *same-origin
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+        // "Content-Type": "application/x-www-form-urlencoded",
+      }
+    }).then(response => {
+      if (response.ok === true) {
+        this.setState({ isLogged: false, loggedUser: "" });
+      }
+    });
+  };
 
   render() {
     const { classes } = this.props;
@@ -77,7 +93,15 @@ class App extends Component {
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser }) =>
                           isLogged ? (
-                            <Typography>logged as {loggedUser}</Typography>
+                            <React.Fragment>
+                              <Typography>logged as {loggedUser}</Typography>
+                              <Button
+                                color="inherit"
+                                onClick={this.handleLogout}
+                              >
+                                Logout
+                              </Button>
+                            </React.Fragment>
                           ) : (
                             <React.Fragment>
                               <Button color="inherit">
