@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -37,12 +36,6 @@ const styles = {
     marginRight: 20
   }
 };
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-  },
-});
 
 class App extends Component {
   constructor(props) {
@@ -86,7 +79,6 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <div id="container">
-      <MuiThemeProvider theme={theme}>
         <LoginContext.Provider value={this.state}>
           <ApolloProvider client={client}>
             <Router>
@@ -139,7 +131,6 @@ class App extends Component {
             </Router>
           </ApolloProvider>
         </LoginContext.Provider>
-      </MuiThemeProvider>
       </div>
     );
   }
