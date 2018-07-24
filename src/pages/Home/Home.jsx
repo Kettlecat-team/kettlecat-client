@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ChakibooList from "../../components/ChakibooList";
+import ChakibooListContainer from "../../components/ChakibooListContainer";
 import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
 
@@ -20,7 +20,7 @@ class Home extends Component {
         {({ loading, error, data }) => {
           if (loading) return <div>Loading...</div>;
           if (error) return <div>Error :(</div>;
-          return <ChakibooList data={data} />;
+          return <ChakibooListContainer data={data} />;
         }}
       </Query>
     );

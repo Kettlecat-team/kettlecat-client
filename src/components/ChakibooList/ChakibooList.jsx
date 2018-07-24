@@ -16,22 +16,20 @@ const styles = theme => ({
 });
 
 const ChakibooList = (props) => {
-const {chakiboos} = props.data;
-const { classes } = props;
+const {chakiboos} = props.data.data;
+// const { classes } = props.data;
 
   return ((chakiboos.map(({title, description, id,}) =>(
-    <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}> 
-            <div>{title} </div>
-            <div>{description} </div>
-            <ChakibooListButtons/>
-         </Paper>
-         
-        </Grid>
+
+      <Grid item xs={6}>
+        <Paper> 
+          <div>{title} </div>
+          <div>{description} </div>
+          <ChakibooListButtons/>
+        </Paper>
+        
       </Grid>
-    </div>
+
     )))
   );
 };

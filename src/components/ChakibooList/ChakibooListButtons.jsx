@@ -43,15 +43,13 @@ function IconLabelButtons(props) {
         Copy
         <CloudUploadIcon className={classes.rightIcon} />
       </Button>
-      <Button variant="contained" size="small" className={classes.button}>
+      {/* <Button variant="contained" size="small" className={classes.button}>
         <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
         More
-      </Button>
-      <IconButton
-                
-              >
-                <ThumbUp />
-              </IconButton>       
+      </Button> */}
+      <IconButton>
+        <ThumbUp />
+      </IconButton>       
     </div>
   );
 }
