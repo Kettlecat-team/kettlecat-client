@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+};
+
+#cardContainer{
+    diplay: flex;
+    justify-content: center;
+}
+
+.cardContent{
+    flex-direction: column;
+}
