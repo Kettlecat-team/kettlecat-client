@@ -18,7 +18,8 @@ import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
 
 const client = new ApolloClient({
-  uri: "https://kettlecat-graphql.herokuapp.com/graphql"
+  uri: "https://kettlecat-graphql.herokuapp.com/graphql",
+  credentials: "include"
 });
 
 const styles = {
@@ -90,6 +91,9 @@ class App extends Component {
                       >
                         <Link to="/">Kettlecat</Link>
                       </Typography>
+                      <Button color="inherit">
+                                <Link to="/creator">Create</Link>
+                              </Button>
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser }) =>
                           isLogged ? (
