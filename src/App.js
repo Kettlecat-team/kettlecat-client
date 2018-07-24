@@ -20,22 +20,15 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
+
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql"
 });
-
-const styles = {
-  root: {
-    flexGrow: 1
-  },
-  flex: {
-    flex: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
-  }
-};
 
 class App extends Component {
   constructor(props) {
@@ -76,20 +69,18 @@ class App extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <div id="container">
         <LoginContext.Provider value={this.state}>
           <ApolloProvider client={client}>
+          <MuiThemeProvider theme={theme}>
             <Router>
               <div>
-                <div className={classes.root}>
+                <div>
                   <AppBar position="static">
                     <Toolbar>
                       <Typography
                         variant="title"
-                        color="inherit"
-                        className={classes.flex}
                       >
                         <Link to="/">Kettlecat</Link>
                       </Typography>
@@ -99,7 +90,6 @@ class App extends Component {
                             <React.Fragment>
                               <Typography>logged as {loggedUser}</Typography>
                               <Button
-                                color="inherit"
                                 onClick={this.handleLogout}
                               >
                                 Logout
@@ -107,10 +97,10 @@ class App extends Component {
                             </React.Fragment>
                           ) : (
                             <React.Fragment>
-                              <Button color="inherit">
+                              <Button>
                                 <Link to="/login">Login</Link>
                               </Button>
-                              <Button color="inherit">
+                              <Button>
                                 <Link to="/signup">Sign Up</Link>
                               </Button>
                             </React.Fragment>
@@ -129,6 +119,7 @@ class App extends Component {
                 </Switch>
               </div>
             </Router>
+        </MuiThemeProvider>
           </ApolloProvider>
         </LoginContext.Provider>
       </div>
@@ -136,4 +127,4 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles)(App);
+export default App;
