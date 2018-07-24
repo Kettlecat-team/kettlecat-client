@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
 import Monaco from "../../components/Monaco";
 import MonacoForm from '../../components/MonacoForm';
+let defaults = {
+    markdown: "//code",
+    javascript: "//code",
+  }
+  let options = {
+    lineNumbers: true,
 
+  }
 class ChakibooCreator extends Component {
     state = {
         title: "",
         description: "",
-        code: "",
+        code: "//type code here",
         tags: [],
-        launguage: "",
+        mode: "markdown",
+        readOnly: false,
     }
 
     handleChange = event => {
@@ -25,11 +33,27 @@ class ChakibooCreator extends Component {
     handleCodeChange(event) {
 
         const value = event.target.value;
-      
         this.setState({ 
           code: value
         })
+        console.log(value);
       };
+
+      changeMode = (e) => {
+        var mode = e.target.value;
+        console.log(mode);
+            this.setState({
+                mode: mode,
+                code: defaults[mode]
+            });
+      }
+      
+      updateCode = (newCode) => {
+        this.setState({
+          code: newCode
+        });
+    
+      }
     handleSubmit = event => {
         event.preventDefault();
     
@@ -40,7 +64,9 @@ class ChakibooCreator extends Component {
           //console.log(parsedTags);
             
           tags.push(parsedTags);
-          
+          this.setState({
+              tags: parsedTags,
+          });
           alert(
             "Title is: " +
               this.state.title +
@@ -52,7 +78,7 @@ class ChakibooCreator extends Component {
                 "Title is: " +
                   this.state.title +
                   ". And the description is: " +
-                  this.state.description
+                  this.state.description + ". The code is: " + this.state.code
               );
         }
        
@@ -61,13 +87,18 @@ class ChakibooCreator extends Component {
     render() {
         return (
             <div>
-                <Monaco code={this.state.code} handleChange={this.handleCodeChange}/>
+                <Monaco 
+                    value={this.state.code}
+                    onChange={this.updateCode.bind(this)}
+                    options={options}
+                    changeMode={this.changeMode}
+                    mode={this.state.mode}
+                />
                 <MonacoForm 
                     handleChange = {this.handleChange}
                     handleSubmit = {this.handleSubmit}
                     title= {this.state.title}
                     description= {this.state.description}
-                    code= {this.state.code}
                     tags= {this.state.tags}
                     launguage= {this.state.language}
                 />
