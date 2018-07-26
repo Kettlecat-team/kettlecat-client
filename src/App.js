@@ -94,9 +94,6 @@ class App extends Component {
                       <Button color="inherit">
                                 <Link to="/creator">Create</Link>
                               </Button>
-                              <Button color="inherit">
-                                <Link to="/editor/5b57d20a797cff00142702db">Edit Test</Link>
-                              </Button>
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser }) =>
                           isLogged ? (
