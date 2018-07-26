@@ -85,8 +85,15 @@ class App extends Component {
                               <Button color="inherit">
                                 <Link to="/creator">Create</Link>
                               </Button>
+                              {/* <Button color="inherit">
+                                <Link to="/editor/5b5a33a8be2ddb00141732e8">
+                                  Edit Test
+                                </Link>
+                              </Button> */}
                               <Button color="inherit">
-                                <Link to={`/mychakiboos/${loggedUserID}`}>My Chakiboos</Link>
+                                <Link to={`/mychakiboos/${loggedUserID}`}>
+                                  My Chakiboos
+                                </Link>
                               </Button>
                               <Typography>logged as {loggedUser}</Typography>
                               <Button onClick={this.handleLogout}>
@@ -94,15 +101,15 @@ class App extends Component {
                               </Button>
                             </React.Fragment>
                           ) : (
-                              <React.Fragment>
-                                <Button>
-                                  <Link to="/login">Login</Link>
-                                </Button>
-                                <Button>
-                                  <Link to="/signup">Sign Up</Link>
-                                </Button>
-                              </React.Fragment>
-                            )
+                            <React.Fragment>
+                              <Button>
+                                <Link to="/login">Login</Link>
+                              </Button>
+                              <Button>
+                                <Link to="/signup">Sign Up</Link>
+                              </Button>
+                            </React.Fragment>
+                          )
                         }
                       </LoginContext.Consumer>
                     </Toolbar>
@@ -115,7 +122,11 @@ class App extends Component {
                   <Route exact path="/signup" component={SignUp} />
                   <Route exact path="/creator" component={ChakibooCreator} />
                   <Route exact path="/editor/:id" component={Editor} />
-                  <Route exact path="/mychakiboos/:id" component={MyChakiboos} />
+                  <Route
+                    exact
+                    path="/mychakiboos/:id"
+                    component={MyChakiboos}
+                  />
                   {/* <Route exact path="/editor" copmonent={Editor} /> */}
                 </Switch>
               </div>
