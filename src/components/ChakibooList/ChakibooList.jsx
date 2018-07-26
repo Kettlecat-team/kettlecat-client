@@ -29,7 +29,8 @@ const ChakibooList = (props) => {
 const { chakiboos } = props.data.data;
 const { classes } = props.data;
 
-  return ((chakiboos.map(({title, description, id,}) =>(
+  return ((chakiboos.map(({title, description, author, id,}) => (
+
       <Grid item xs={12} sm={4}>
 
         <Card>
@@ -39,6 +40,9 @@ const { classes } = props.data;
             </Typography>
             <Typography color="textSecondary">
             {description}
+            </Typography>
+            <Typography color="textSecondary">
+            By {author.username}
             </Typography>
           </CardContent>
           <CardActions>

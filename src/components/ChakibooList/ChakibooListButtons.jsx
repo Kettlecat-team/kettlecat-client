@@ -47,11 +47,9 @@ function IconLabelButtons(props) {
         <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
         More
       </Button> */}
-      <IconButton
-                
-              >
-                <ThumbUp />
-              </IconButton>       
+      <IconButton>
+        <ThumbUp />
+      </IconButton>       
     </div>
   );
 }

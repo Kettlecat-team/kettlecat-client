@@ -9,11 +9,22 @@ const GET_CHAKIBOOS = gql`
       id
       title
       description
+      author {
+        username
+      }
     }
   }
 `;
 
 class Home extends Component {
+  parseData = data => {
+    // console.log(data.chakiboos);
+    data.chakiboos.forEach( d => 
+      d.author.username = "Ramzi"
+    );
+    return data;
+  }
+  
   render() {
     return (
       <Query query={GET_CHAKIBOOS}>
