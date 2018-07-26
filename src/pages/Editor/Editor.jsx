@@ -2,8 +2,35 @@ import React, { Component } from "react";
 import Monaco from "../../components/Monaco";
 import MonacoForm from "../../components/MonacoForm";
 import { gql } from "apollo-boost";
-import { Mutation } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import { Redirect } from "react-router-dom";
+
+const getData = id => {
+  // Default options are marked with *
+  return fetch("https://kettlecat-graphql.herokuapp.com/graphql", {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, cors, *same-origin
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+      // "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: JSON.stringify({
+      query: `
+          query{
+            chakiboo(id: "${id}"){
+              id
+              title
+              description
+              language
+            }
+          }
+        `
+    }) // body data type must match "Content-Type" header
+  })
+    .then(response => response.json()) // parses response to JSON
+    .catch(error => console.error(`Fetch Error =\n`, error));
+};
 
 let defaults = {
   markdown: "//code",
@@ -12,16 +39,27 @@ let defaults = {
 let options = {
   lineNumbers: true
 };
-
-const CREATE_CHAKIBOO = gql`
-  mutation addChakiboo(
+const FETCH_CHAKIBOO = gql`
+  query fetchChakiboo($id: String) {
+    chakiboo(id: $id) {
+      title
+      description
+      code
+      language
+    }
+  }
+`;
+const UPDATE_CHAKIBOO = gql`
+  mutation updateChakiboo(
     $title: String
     $code: String
     $description: String
     $tags: [String]
     $language: String
+    $id: String
   ) {
-    createChakiboo(
+    updateChakiboo(
+      id: $id
       input: {
         title: $title
         code: $code
@@ -34,7 +72,7 @@ const CREATE_CHAKIBOO = gql`
     }
   }
 `;
-class ChakibooCreator extends Component {
+class Editor extends Component {
   state = {
     title: "",
     description: "",
@@ -44,6 +82,17 @@ class ChakibooCreator extends Component {
     readOnly: false,
     isDone: false
   };
+
+  componentDidMount() {
+    getData(this.props.match.params.id).then(data => {
+      this.setState({
+        title: data.data.chakiboo.title,
+        description: data.data.chakiboo.description,
+        code: data.data.chakiboo.code,
+        language: data.data.chakiboo.language
+      });
+    });
+  }
 
   handleChange = event => {
     event.preventDefault();
@@ -121,7 +170,18 @@ class ChakibooCreator extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <Mutation mutation={CREATE_CHAKIBOO}>
+      // <Query query={FETCH_CHAKIBOO} variables={{id: this.props.match.params.id}}>
+      //     {({ loading, error, data }) => {
+      // if (loading) return <div>Loading...</div>;
+      // if (error) return <div>Error :(</div>;
+      //     this.setState({
+      //         title: data.chakiboo.title,
+      //         description: data.chakiboo.description,
+      //         code: data.chakiboo.code,
+      //         language: data.chakiboo.language
+      //     })
+      // return(
+      <Mutation mutation={UPDATE_CHAKIBOO}>
         {(addChakiboo, { data, error }) => {
           return (
             <div>
@@ -140,6 +200,7 @@ class ChakibooCreator extends Component {
 
                   addChakiboo({
                     variables: {
+                      id: this.props.match.params.id,
                       title: this.state.title,
                       description: this.state.description,
                       code: this.state.code,
@@ -158,7 +219,9 @@ class ChakibooCreator extends Component {
         }}
       </Mutation>
     );
+    // }}
+    // </Query>
   }
 }
 
-export default ChakibooCreator;
+export default Editor;
