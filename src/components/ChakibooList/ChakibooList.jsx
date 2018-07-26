@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
-    minWidth: 275,
+    maxWidth: 275,
   },
   bullet: {
     display: 'inline-block',
@@ -30,8 +30,7 @@ const { chakiboos } = props.data.data;
 const { classes } = props.data;
 
   return ((chakiboos.map(({title, description, id,}) =>(
-
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={4}>
 
         <Card>
           <CardContent>
