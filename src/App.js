@@ -18,6 +18,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
 import MyChakiboos from "./pages/MyChakiboos";
+import ChakibooView from "./pages/ChakibooView/ChakibooView";
 
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql",
@@ -122,6 +123,7 @@ class App extends Component {
                   <Route exact path="/signup" component={SignUp} />
                   <Route exact path="/creator" component={ChakibooCreator} />
                   <Route exact path="/editor/:id" component={Editor} />
+                  <Route exact path="/viewer/:id" component={ChakibooView} />
                   <Route
                     exact
                     path="/mychakiboos/:id"

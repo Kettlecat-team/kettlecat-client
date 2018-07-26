@@ -165,6 +165,7 @@ class ChakibooCompleteForm extends Component {
                 options={this.state.options}
                 changeMode={this.changeMode}
                 mode={this.state.mode}
+                readOnly={this.props.readOnly}
               />
               <MonacoForm
                 readOnly={this.props.readOnly}
