@@ -22,7 +22,7 @@ const Monaco = props => {
       <select onChange={props.changeMode} value={props.options.mode}>
         <option value="markdown">Markdown</option>
         <option value="javascript">JavaScript</option>
-        <option value="xml">JavaScript</option>
+        <option value="xml">XML</option>
         <option value="htmlmixed">HTML</option>
         <option value="css">CSS</option>
         <option value="go">Go</option>
