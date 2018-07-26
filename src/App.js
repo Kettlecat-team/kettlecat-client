@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
-
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Editor from "./pages/Editor";
@@ -19,8 +18,6 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
 
-
-
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql",
   credentials: "include"
@@ -30,16 +27,18 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleLogin = username => {
+    this.toggleLogin = userData => {
       this.setState(state => ({
         isLogged: true,
-        loggedUser: username
+        loggedUser: userData.username,
+        loggedUserID: userData.id
       }));
     };
 
     this.state = {
       isLogged: false,
       loggedUser: "",
+      loggedUserID: "",
       toggleLogin: this.toggleLogin
     };
   }
@@ -59,7 +58,7 @@ class App extends Component {
       }
     }).then(response => {
       if (response.ok === true) {
-        this.setState({ isLogged: false, loggedUser: "" });
+        this.setState({ isLogged: false, loggedUser: "", loggedUserID: "" });
       }
     });
   };
@@ -72,33 +71,25 @@ class App extends Component {
             <Router>
               <div>
                 <div>
-                  
                   <AppBar position="static">
-                  
                     <Toolbar>
-                      <Typography
-                        variant="title"
-                      >
+                      <Typography variant="title">
                         <Link to="/">Kettlecat</Link>
                       </Typography>
-
-                      <Button color="inherit">
-                                <Link to="/creator">Create</Link>
-                              </Button>
 
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser }) =>
                           isLogged ? (
                             <React.Fragment>
+                              <Button color="inherit">
+                                <Link to="/creator">Create</Link>
+                              </Button>
                               <Typography>logged as {loggedUser}</Typography>
-                              <Button
-                                onClick={this.handleLogout}
-                              >
+                              <Button onClick={this.handleLogout}>
                                 Logout
                               </Button>
                             </React.Fragment>
                           ) : (
-                            
                             <React.Fragment>
                               <Button>
                                 <Link to="/login">Login</Link>
