@@ -2,6 +2,12 @@ import React from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
+import {
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel
+} from "../../../node_modules/@material-ui/core";
 require("codemirror/mode/xml/xml");
 require("codemirror/mode/javascript/javascript");
 require("codemirror/mode/markdown/markdown");
@@ -19,15 +25,25 @@ const Monaco = props => {
         options={props.options}
       />
 
-      <select onChange={props.changeMode} value={props.options.mode}>
-        <option value="markdown">Markdown</option>
-        <option value="javascript">JavaScript</option>
-        <option value="xml">XML</option>
-        <option value="htmlmixed">HTML</option>
-        <option value="css">CSS</option>
-        <option value="go">Go</option>
-        <option value="python">Python</option>
-      </select>
+      <FormControl disabled={props.readOnly}>
+        <InputLabel htmlFor="language">Language</InputLabel>
+        <Select
+          value={props.options.mode}
+          onChange={props.changeMode}
+          inputProps={{
+            name: "Language",
+            id: "language"
+          }}
+        >
+          <MenuItem value="markdown">Markdown</MenuItem>
+          <MenuItem value="javascript">JavaScript</MenuItem>
+          <MenuItem value="xml">XML</MenuItem>
+          <MenuItem value="htmlmixed">HTML</MenuItem>
+          <MenuItem value="css">CSS</MenuItem>
+          <MenuItem value="go">Go</MenuItem>
+          <MenuItem value="python">Python</MenuItem>
+        </Select>
+      </FormControl>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import ViewIcon from "@material-ui/icons/Visibility";
 import IconButton from "@material-ui/core/IconButton";
 import { ThumbUp } from "@material-ui/icons";
 import LoginContext from "./../../contexts/LoginContext";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   button: {
@@ -88,10 +89,12 @@ function IconLabelButtons(props) {
         } else {
           return (
             <Button variant="contained" size="small" className={classes.button}>
-              <ViewIcon
-                className={classNames(classes.leftIcon, classes.iconSmall)}
-              />
-              View
+              <Link to={`/viewer/${chakibooID}`}>
+                View
+                <ViewIcon
+                  className={classNames(classes.leftIcon, classes.iconSmall)}
+                />
+              </Link>
             </Button>
           );
         }

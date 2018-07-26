@@ -1,9 +1,4 @@
-import React, { Component } from "react";
-import Monaco from "../../components/Monaco";
-import MonacoForm from "../../components/MonacoForm";
-import { gql } from "apollo-boost";
-import { Mutation, Query } from "react-apollo";
-import { Redirect } from "react-router-dom";
+import React from "react";
 import ChakibooCompleteForm from "../../components/ChakibooCompleteForm";
 
 function Editor(props) {
