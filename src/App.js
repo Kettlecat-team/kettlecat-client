@@ -17,6 +17,7 @@ import ChakibooCreator from "./pages/ChakibooCreator/ChakibooCreator";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
+import MyChakiboos from "./pages/MyChakiboos";
 
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql",
@@ -78,11 +79,14 @@ class App extends Component {
                       </Typography>
 
                       <LoginContext.Consumer>
-                        {({ isLogged, loggedUser }) =>
+                        {({ isLogged, loggedUser, loggedUserID }) =>
                           isLogged ? (
                             <React.Fragment>
                               <Button color="inherit">
                                 <Link to="/creator">Create</Link>
+                              </Button>
+                              <Button color="inherit">
+                                <Link to={`/mychakiboos/${loggedUserID}`}>My Chakiboos</Link>
                               </Button>
                               <Typography>logged as {loggedUser}</Typography>
                               <Button onClick={this.handleLogout}>
@@ -90,15 +94,15 @@ class App extends Component {
                               </Button>
                             </React.Fragment>
                           ) : (
-                            <React.Fragment>
-                              <Button>
-                                <Link to="/login">Login</Link>
-                              </Button>
-                              <Button>
-                                <Link to="/signup">Sign Up</Link>
-                              </Button>
-                            </React.Fragment>
-                          )
+                              <React.Fragment>
+                                <Button>
+                                  <Link to="/login">Login</Link>
+                                </Button>
+                                <Button>
+                                  <Link to="/signup">Sign Up</Link>
+                                </Button>
+                              </React.Fragment>
+                            )
                         }
                       </LoginContext.Consumer>
                     </Toolbar>
@@ -111,6 +115,7 @@ class App extends Component {
                   <Route exact path="/signup" component={SignUp} />
                   <Route exact path="/creator" component={ChakibooCreator} />
                   <Route exact path="/editor/:id" component={Editor} />
+                  <Route exact path="/mychakiboos/:id" component={MyChakiboos} />
                   {/* <Route exact path="/editor" copmonent={Editor} /> */}
                 </Switch>
               </div>
