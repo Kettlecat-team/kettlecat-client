@@ -85,11 +85,11 @@ class App extends Component {
                               <Button color="inherit">
                                 <Link to="/creator">Create</Link>
                               </Button>
-                              <Button color="inherit">
+                              {/* <Button color="inherit">
                                 <Link to="/editor/5b5a33a8be2ddb00141732e8">
                                   Edit Test
                                 </Link>
-                              </Button>
+                              </Button> */}
                               <Button color="inherit">
                                 <Link to={`/mychakiboos/${loggedUserID}`}>
                                   My Chakiboos

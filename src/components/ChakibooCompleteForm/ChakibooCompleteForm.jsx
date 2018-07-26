@@ -21,6 +21,7 @@ const getData = id => {
             chakiboo(id: "${id}"){
               id
               title
+              code
               description
               language
             }
@@ -95,12 +96,15 @@ class ChakibooCompleteForm extends Component {
   componentDidMount() {
     if (!this.props.isCreation) {
       getData(this.props.editID).then(data => {
+        let newOptions = Object.assign(this.state.options);
+        newOptions.mode = data.data.chakiboo.language;
         this.setState({
           title: data.data.chakiboo.title,
           description: data.data.chakiboo.description,
           code: data.data.chakiboo.code,
-          language: data.data.chakiboo.language
+          options: newOptions
         });
+        console.log(data.data.chakiboo.code);
       });
     }
   }
@@ -122,6 +126,8 @@ class ChakibooCompleteForm extends Component {
       options: newOptions
     });
   };
+
+  initializeCode;
 
   updateCode = (editor, data, value) => {
     this.setState({
@@ -161,6 +167,7 @@ class ChakibooCompleteForm extends Component {
                 mode={this.state.mode}
               />
               <MonacoForm
+                readOnly={this.props.readOnly}
                 handleChange={this.handleChange}
                 handleSubmit={e => {
                   e.preventDefault();
@@ -182,7 +189,7 @@ class ChakibooCompleteForm extends Component {
                         description: this.state.description,
                         code: this.state.code,
                         tags: this.parseTags(this.state.description),
-                        language: this.state.mode
+                        language: this.state.options.mode
                       }
                     });
                   }
