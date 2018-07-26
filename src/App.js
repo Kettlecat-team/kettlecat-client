@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
@@ -20,11 +19,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-  },
-});
+
 
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql"
@@ -73,17 +68,19 @@ class App extends Component {
       <div id="container">
         <LoginContext.Provider value={this.state}>
           <ApolloProvider client={client}>
-          <MuiThemeProvider theme={theme}>
             <Router>
               <div>
                 <div>
+                  
                   <AppBar position="static">
+                  
                     <Toolbar>
                       <Typography
                         variant="title"
                       >
                         <Link to="/">Kettlecat</Link>
                       </Typography>
+
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser }) =>
                           isLogged ? (
@@ -96,6 +93,7 @@ class App extends Component {
                               </Button>
                             </React.Fragment>
                           ) : (
+                            
                             <React.Fragment>
                               <Button>
                                 <Link to="/login">Login</Link>
@@ -119,7 +117,6 @@ class App extends Component {
                 </Switch>
               </div>
             </Router>
-        </MuiThemeProvider>
           </ApolloProvider>
         </LoginContext.Provider>
       </div>
