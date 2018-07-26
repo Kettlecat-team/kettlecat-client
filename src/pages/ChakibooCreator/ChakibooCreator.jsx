@@ -107,50 +107,28 @@ class ChakibooCreator extends Component {
                 
                 return(
                 <div>
-                                        <Monaco 
-                                            value={this.state.code}
-                                            onChange={this.updateCode.bind(this)}
-                                            options={options}
-                                            changeMode={this.changeMode}
-                                            mode={this.state.mode}
-                                        />
-                                        <MonacoForm 
-                                            handleChange = {this.handleChange}
-                                            handleSubmit = {(e) => {e.preventDefault();
-                                                console.log("run");
+                    <Monaco 
+                        value={this.state.code}
+                        onChange={this.updateCode.bind(this)}
+                        options={options}
+                        changeMode={this.changeMode}
+                        mode={this.state.mode}
+                    />
+                    <MonacoForm 
+                        handleChange = {this.handleChange}
+                        handleSubmit = {(e) => {e.preventDefault();
+                            console.log("run");
 
-                                                addChakiboo({ variables: { title: this.state.title, description: this.state.description, code: this.state.code, tags: this.state.tags, language: this.state.mode } })}}
-                                            title= {this.state.title}
-                                            description= {this.state.description}
-                                            tags= {this.state.tags}
-                                        />
-                                        
-                                        
-                                    </div>
+                            addChakiboo({ variables: { title: this.state.title, description: this.state.description, code: this.state.code, tags: this.state.tags, language: this.state.mode } })}}
+                        title= {this.state.title}
+                        description= {this.state.description}
+                        tags= {this.state.tags}
+                    />
+                    
+                    
+                </div>
             )}}
-                            {/* {({ loading, error, data }) => {
-                            if (loading) return <div>Loading...</div>;
-                            if (error) return <div>Error</div>;
-                                return
-                                    <div>
-                                        <Monaco 
-                                            value={this.state.code}
-                                            onChange={this.updateCode.bind(this)}
-                                            options={options}
-                                            changeMode={this.changeMode}
-                                            mode={this.state.mode}
-                                        />
-                                        <MonacoForm 
-                                            handleChange = {this.handleChange}
-                                            handleSubmit = {this.handleSubmit}
-                                            title= {this.state.title}
-                                            description= {this.state.description}
-                                            tags= {this.state.tags}
-                                        />
-                                        
-                                    </div>
-            
-                            }}  */}
+                            
                         </Mutation>
             
                     );
