@@ -10,7 +10,8 @@ let defaults = {
   javascript: "//code"
 };
 let options = {
-  lineNumbers: true
+  lineNumbers: true,
+  theme: "material"
 };
 
 const CREATE_CHAKIBOO = gql`
@@ -39,83 +40,52 @@ class ChakibooCreator extends Component {
     title: "",
     description: "",
     code: "//type code here",
-    tags: [],
-    mode: "markdown",
-    readOnly: false,
-    isDone: false
+    isDone: false,
+    options: {
+      mode: "markdown",
+      theme: "material",
+      lineNumbers: true,
+      readOnly: false
+    }
   };
 
   handleChange = event => {
     event.preventDefault();
-
     let value = event.target.value;
     const name = event.target.name;
-
     this.setState({
       [name]: value
     });
   };
 
-  handleCodeChange(event) {
-    const value = event.target.value;
+  changeMode = e => {
+    const mode = e.target.value;
+    let newOptions = Object.assign(this.state.options);
+    newOptions.mode = mode;
+    this.setState({
+      options: newOptions
+    });
+  };
+
+  updateCode = (editor, data, value) => {
     this.setState({
       code: value
     });
-    console.log(value);
-  }
-
-  changeMode = e => {
-    var mode = e.target.value;
-    console.log(mode);
-    this.setState({
-      mode: mode,
-      code: defaults[mode]
-    });
   };
 
-  updateCode = newCode => {
-    this.setState({
-      code: newCode
-    });
-  };
-  handleSubmit = event => {
-    event.preventDefault();
-
+  parseTags = description => {
     let descriptionFull = this.state.description;
-    let tags = [];
     if (descriptionFull.indexOf("#") >= 0) {
       let parsedTags = descriptionFull
         .match(/(^|\W)(#[a-z\d][\w-]*)/gi)
         .map(value => value.substr(2));
       //console.log(parsedTags);
-
-      tags.push(parsedTags);
-      this.setState({
-        tags: parsedTags
-      });
-      alert(
-        "Title is: " +
-          this.state.title +
-          ". And the description is: " +
-          this.state.description +
-          "the hash is " +
-          parsedTags +
-          "the code is: " +
-          this.state.code
-      );
+      return parsedTags;
     } else {
-      alert(
-        "Title is: " +
-          this.state.title +
-          ". And the description is: " +
-          this.state.description +
-          ". The code is: " +
-          this.state.code
-      );
+      return [];
     }
-
-    console.log(tags);
   };
+
   render() {
     if (this.state.isDone) {
       return <Redirect to="/" />;
@@ -128,7 +98,7 @@ class ChakibooCreator extends Component {
               <Monaco
                 value={this.state.code}
                 onChange={this.updateCode.bind(this)}
-                options={options}
+                options={this.state.options}
                 changeMode={this.changeMode}
                 mode={this.state.mode}
               />
@@ -143,8 +113,8 @@ class ChakibooCreator extends Component {
                       title: this.state.title,
                       description: this.state.description,
                       code: this.state.code,
-                      tags: this.state.tags,
-                      language: this.state.mode
+                      tags: this.parseTags(this.state.description),
+                      language: this.state.options.mode
                     }
                   });
                   this.setState({ isDone: true });
