@@ -26,7 +26,7 @@ const styles = {
 };
 
 const ChakibooList = props => {
-  const { chakiboos } = props.data.data;
+  const { chakiboos } = props.data;
   const { classes } = props.data;
 
   return chakiboos.map(({ title, description, author, id }) => (
