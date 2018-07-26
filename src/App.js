@@ -27,16 +27,18 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleLogin = username => {
+    this.toggleLogin = userData => {
       this.setState(state => ({
         isLogged: true,
-        loggedUser: username
+        loggedUser: userData.username,
+        loggedUserID: userData.id
       }));
     };
 
     this.state = {
       isLogged: false,
       loggedUser: "",
+      loggedUserID: "",
       toggleLogin: this.toggleLogin
     };
   }
@@ -56,7 +58,7 @@ class App extends Component {
       }
     }).then(response => {
       if (response.ok === true) {
-        this.setState({ isLogged: false, loggedUser: "" });
+        this.setState({ isLogged: false, loggedUser: "", loggedUserID: "" });
       }
     });
   };
@@ -76,7 +78,7 @@ class App extends Component {
                       </Typography>
 
                       <LoginContext.Consumer>
-                        {({ isLogged, loggedUser }) =>
+                        {({ isLogged, loggedUser, loggedUserID }) =>
                           isLogged ? (
                             <React.Fragment>
                               <Button color="inherit">
