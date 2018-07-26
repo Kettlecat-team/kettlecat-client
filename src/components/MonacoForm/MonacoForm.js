@@ -17,7 +17,7 @@ import TextField from '@material-ui/core/TextField'; */
 }; */
 
 const MonacoForm = props => (
-  <form>
+  <form onSubmit={props.handleSubmit}>
     <div className ="form">
       <label>
         Title:
@@ -39,7 +39,6 @@ const MonacoForm = props => (
       </label>
       <div className="button">
         <button
-          onClick = {props.handleSubmit}
           type="submit"
         >
           Submit

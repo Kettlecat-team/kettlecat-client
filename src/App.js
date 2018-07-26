@@ -11,7 +11,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-
+import Editor from "./pages/Editor";
 import Home from "./pages/Home";
 import "./App.css";
 import ChakibooCreator from "./pages/ChakibooCreator/ChakibooCreator";
@@ -22,7 +22,8 @@ import LoginContext from "./contexts/LoginContext";
 
 
 const client = new ApolloClient({
-  uri: "https://kettlecat-graphql.herokuapp.com/graphql"
+  uri: "https://kettlecat-graphql.herokuapp.com/graphql",
+  credentials: "include"
 });
 
 class App extends Component {
@@ -81,6 +82,10 @@ class App extends Component {
                         <Link to="/">Kettlecat</Link>
                       </Typography>
 
+                      <Button color="inherit">
+                                <Link to="/creator">Create</Link>
+                              </Button>
+
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser }) =>
                           isLogged ? (
@@ -114,6 +119,8 @@ class App extends Component {
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={SignUp} />
                   <Route exact path="/creator" component={ChakibooCreator} />
+                  <Route exact path="/editor/:id" component={Editor} />
+                  {/* <Route exact path="/editor" copmonent={Editor} /> */}
                 </Switch>
               </div>
             </Router>
