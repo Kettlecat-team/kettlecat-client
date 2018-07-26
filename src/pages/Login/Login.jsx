@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { Redirect } from "react-router-dom";
 
 import LoginContext from "./../../contexts/LoginContext";
 
@@ -39,7 +40,8 @@ const postData = (url = ``, data = {}) => {
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    isDone: false
   };
 
   handleChange = name => event => {
@@ -56,12 +58,16 @@ class Login extends Component {
     postData(`https://kettlecat-graphql.herokuapp.com/login`, loginUser)
       .then(data => {
         toggleLogin(data);
+        this.setState({ isDone: true });
       }) // JSON from `response.json()` call
       .catch(error => console.error(error));
   };
 
   render() {
     const { classes } = this.props;
+    if (this.state.isDone) {
+      return <Redirect to="/" />;
+    }
     return (
       <form>
         <TextField
