@@ -1,37 +1,57 @@
 import React from "react";
-import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ChakibooListButtons from "./ChakibooListButtons";
+import Typography from '@material-ui/core/Typography';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
+const styles = {
+  card: {
+    maxWidth: 275,
   },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
   },
-});
+  title: {
+    marginBottom: 16,
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+};
 
 const ChakibooList = (props) => {
-const {chakiboos} = props.data;
-const { classes } = props;
+const { chakiboos } = props.data.data;
+const { classes } = props.data;
 
-  return ((chakiboos.map(({title, description, id,}) =>(
-    <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}> 
-            <div>{title} </div>
-            <div>{description} </div>
+  return ((chakiboos.map(({title, description, author, id,}) => (
+
+      <Grid item xs={12} sm={4}>
+
+        <Card>
+          <CardContent>
+            <Typography variant="headline" component="h2">
+            {title}
+            </Typography>
+            <Typography color="textSecondary">
+            {description}
+            </Typography>
+            <Typography color="textSecondary">
+            By {author.username}
+            </Typography>
+          </CardContent>
+          <CardActions>
             <ChakibooListButtons/>
-         </Paper>
-         
-        </Grid>
+          </CardActions>
+        </Card>
+        
       </Grid>
-    </div>
+
     )))
   );
 };
