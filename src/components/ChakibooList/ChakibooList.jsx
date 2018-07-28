@@ -42,8 +42,8 @@ const ChakibooList = props => {
           </Typography>
           <Typography color="textSecondary">By {author.username}</Typography>
         </CardContent>
-        <CardActions>
-          <ChakibooListButtons chakibooID={id} authorID={author.id} />
+        <CardActions className="cardButtons">
+          <ChakibooListButtons chakibooID={id} authorID={author.id}/>
         </CardActions>
       </Card>
     </Grid>
