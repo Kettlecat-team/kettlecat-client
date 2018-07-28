@@ -12,7 +12,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Query query={queries.GET_CHAKIBOOS}>
+      <Query query={queries.GET_CHAKIBOOS} pollInterval={2000}>
         {({ loading, error, data }) => {
           if (loading) return <div>Loading...</div>;
           if (error) return <div>Error :(</div>;

@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import { gql } from "apollo-boost";
 import { Mutation } from "../../../node_modules/react-apollo";
 
+import queries from "./../../graphQL/queries"
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
@@ -84,6 +86,16 @@ function IconLabelButtons(props) {
                 <Mutation
                   mutation={DELETE_CHAKIBOO}
                   variables={{ id: chakibooID }}
+                  // update={(cache, { data: { deleteChakiboo } }) => {
+                  //   const { chakiboos } = cache.readQuery({
+                  //     query: queries.GET_CHAKIBOOS
+                  //   });
+                  //   console.log(chakiboos);
+                    // cache.writeQuery({
+                    //   query: queries.GET_CHAKIBOOS,
+                    //   data: { chakiboos: chakiboos.concat([createChakiboo]) }
+                    // });
+                  // }}
                 >
                   {(deleteChakiboo, { data, error }) => (
                     <Button

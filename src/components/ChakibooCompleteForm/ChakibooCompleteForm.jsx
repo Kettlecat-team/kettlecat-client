@@ -5,6 +5,7 @@ import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import { Redirect } from "react-router-dom";
 import queries from "./../../graphQL/queries";
+import LoginContext from "../../contexts/LoginContext";
 
 const getData = id => {
   // Default options are marked with *
@@ -160,7 +161,13 @@ class ChakibooCompleteForm extends Component {
 
   render() {
     if (this.state.isDone) {
-      return <Redirect to="/" />;
+      return (
+        <LoginContext.Consumer>
+          {({ loggedUserID }) => (
+            <Redirect to={`/mychakiboos/${loggedUserID}`} />
+          )}
+        </LoginContext.Consumer>
+      );
     }
     return (
       <Mutation

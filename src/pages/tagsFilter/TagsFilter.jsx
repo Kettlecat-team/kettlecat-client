@@ -29,6 +29,7 @@ class TagsFilter extends Component {
       <Query
         query={queries.GET_BY_TAG}
         variables={{ tag: this.props.match.params.tag }}
+        pollInterval={2000}
       >
         {({ loading, error, data }) => {
           if (loading) return <div>Loading...</div>;
