@@ -51,6 +51,21 @@ function IconLabelButtons(props) {
           if (loggedUserID === authorID) {
             return (
               <React.Fragment>
+                <Link to={`/viewer/${chakibooID}`}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    className={classes.button}
+                  >
+                    View
+                    <ViewIcon
+                      className={classNames(
+                        classes.leftIcon,
+                        classes.iconSmall
+                      )}
+                    />
+                  </Button>
+                </Link>
                 <Link to={`/editor/${chakibooID}`}>
                   <Button
                     variant="contained"
@@ -115,17 +130,34 @@ function IconLabelButtons(props) {
                   variables={{ id: chakibooID }}
                 >
                   {(forkChakiboo, { data, error }) => (
-                    <Button
-                      variant="contained"
-                      color="default"
-                      className={classes.button}
-                      onClick={() => {
-                        forkChakiboo({ variables: { id: chakibooID } });
-                      }}
-                    >
-                      Fork
-                      <CloudUploadIcon className={classes.rightIcon} />
-                    </Button>
+                    <React.Fragment>
+                      <Link to={`/viewer/${chakibooID}`}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          className={classes.button}
+                        >
+                          View
+                          <ViewIcon
+                            className={classNames(
+                              classes.leftIcon,
+                              classes.iconSmall
+                            )}
+                          />
+                        </Button>
+                      </Link>
+                      <Button
+                        variant="contained"
+                        color="default"
+                        className={classes.button}
+                        onClick={() => {
+                          forkChakiboo({ variables: { id: chakibooID } });
+                        }}
+                      >
+                        Fork
+                        <CloudUploadIcon className={classes.rightIcon} />
+                      </Button>
+                    </React.Fragment>
                   )}
                 </Mutation>
                 <IconButton>
@@ -136,14 +168,18 @@ function IconLabelButtons(props) {
           }
         } else {
           return (
-            <Button variant="contained" size="small" className={classes.button}>
-              <Link to={`/viewer/${chakibooID}`}>
+            <Link to={`/viewer/${chakibooID}`}>
+              <Button
+                variant="contained"
+                size="small"
+                className={classes.button}
+              >
                 View
                 <ViewIcon
                   className={classNames(classes.leftIcon, classes.iconSmall)}
                 />
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           );
         }
       }}

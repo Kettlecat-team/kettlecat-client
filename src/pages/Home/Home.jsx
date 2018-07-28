@@ -3,20 +3,6 @@ import ChakibooListContainer from "../../components/ChakibooListContainer";
 import { Query } from "react-apollo";
 import queries from "./../../graphQL/queries";
 
-// const GET_CHAKIBOOS = gql`
-//   query {
-//     chakiboos {
-//       id
-//       title
-//       description
-//       author {
-//         username
-//         id
-//       }
-//     }
-//   }
-// `;
-
 class Home extends Component {
   parseData = data => {
     // console.log(data.chakiboos);
