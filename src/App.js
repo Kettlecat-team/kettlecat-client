@@ -10,6 +10,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+
 import Editor from "./pages/Editor";
 import Home from "./pages/Home";
 import "./App.css";
@@ -75,10 +76,12 @@ class App extends Component {
               <div>
                 <div>
                   <AppBar position="static">
-                    <Toolbar>
-                      <Typography variant="title">
-                        <Link to="/">Kettlecat</Link>
-                      </Typography>
+                    <Toolbar className="AppToolbar">
+                      <Link className="CatLogo" to="/">
+                        <div className="img"></div>
+                        <h1>Kettlecat</h1>
+                      </Link>
+                      <div className="spacer"></div>
 
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser, loggedUserID }) =>
