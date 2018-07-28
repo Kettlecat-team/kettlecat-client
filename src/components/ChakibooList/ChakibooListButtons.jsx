@@ -51,16 +51,21 @@ function IconLabelButtons(props) {
           if (loggedUserID === authorID) {
             return (
               <React.Fragment>
-                <Button
-                  variant="contained"
-                  size="small"
-                  className={classes.button}
-                >
-                  <SaveIcon
-                    className={classNames(classes.leftIcon, classes.iconSmall)}
-                  />
-                  Edit
-                </Button>
+                <Link to={`/editor/${chakibooID}`}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    className={classes.button}
+                  >
+                    <SaveIcon
+                      className={classNames(
+                        classes.leftIcon,
+                        classes.iconSmall
+                      )}
+                    />
+                    Edit
+                  </Button>
+                </Link>
                 <Mutation
                   mutation={DELETE_CHAKIBOO}
                   variables={{ id: chakibooID }}
