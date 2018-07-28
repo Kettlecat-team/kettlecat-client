@@ -79,14 +79,6 @@ function IconLabelButtons(props) {
                     </Button>
                   )}
                 </Mutation>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className={classes.button}
-                >
-                  Delete
-                  <DeleteIcon className={classes.rightIcon} />
-                </Button>
                 <Mutation
                   mutation={FORK_CHAKIBOO}
                   variables={{ id: chakibooID }}
