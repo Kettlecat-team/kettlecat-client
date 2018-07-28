@@ -36,6 +36,12 @@ const FORK_CHAKIBOO = gql`
   }
 `;
 
+const DELETE_CHAKIBOO = gql`
+  mutation deleteChakiboo($id: String) {
+    deleteChakiboo(id: $id)
+  }
+`;
+
 function IconLabelButtons(props) {
   const { classes, chakibooID, authorID } = props;
   return (
@@ -55,6 +61,24 @@ function IconLabelButtons(props) {
                   />
                   Edit
                 </Button>
+                <Mutation
+                  mutation={DELETE_CHAKIBOO}
+                  variables={{ id: chakibooID }}
+                >
+                  {(deleteChakiboo, { data, error }) => (
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className={classes.button}
+                      onClick={() => {
+                        deleteChakiboo({ variables: { id: chakibooID } });
+                      }}
+                    >
+                      Delete
+                      <DeleteIcon className={classes.rightIcon} />
+                    </Button>
+                  )}
+                </Mutation>
                 <Button
                   variant="contained"
                   color="secondary"
