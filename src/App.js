@@ -19,6 +19,7 @@ import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
 import MyChakiboos from "./pages/MyChakiboos";
 import ChakibooView from "./pages/ChakibooView/ChakibooView";
+import TagsFilter from "./pages/tagsFilter";
 
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql",
@@ -86,11 +87,9 @@ class App extends Component {
                               <Button color="inherit">
                                 <Link to="/creator">Create</Link>
                               </Button>
-                              {/* <Button color="inherit">
-                                <Link to="/editor/5b5a33a8be2ddb00141732e8">
-                                  Edit Test
-                                </Link>
-                              </Button> */}
+                              <Button color="inherit">
+                                <Link to="/tag/lol">Tags Test</Link>
+                              </Button>
                               <Button color="inherit">
                                 <Link to={`/mychakiboos/${loggedUserID}`}>
                                   My Chakiboos
@@ -124,6 +123,7 @@ class App extends Component {
                   <Route exact path="/creator" component={ChakibooCreator} />
                   <Route exact path="/editor/:id" component={Editor} />
                   <Route exact path="/viewer/:id" component={ChakibooView} />
+                  <Route exact path="/tag/:tag" component={TagsFilter} />
                   <Route
                     exact
                     path="/mychakiboos/:id"
