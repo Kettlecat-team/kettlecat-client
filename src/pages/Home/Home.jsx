@@ -1,26 +1,36 @@
 import React, { Component } from "react";
-import ChakibooList from "../../components/ChakibooList";
-import { gql } from "apollo-boost";
+import ChakibooListContainer from "../../components/ChakibooListContainer";
 import { Query } from "react-apollo";
+import queries from "./../../graphQL/queries";
 
-const GET_CHAKIBOOS = gql`
-  query {
-    chakiboos {
-      id
-      title
-      description
-    }
-  }
-`;
+// const GET_CHAKIBOOS = gql`
+//   query {
+//     chakiboos {
+//       id
+//       title
+//       description
+//       author {
+//         username
+//         id
+//       }
+//     }
+//   }
+// `;
 
 class Home extends Component {
+  parseData = data => {
+    // console.log(data.chakiboos);
+    data.chakiboos.forEach(d => (d.author.username = "Ramzi"));
+    return data;
+  };
+
   render() {
     return (
-      <Query query={GET_CHAKIBOOS}>
+      <Query query={queries.GET_CHAKIBOOS}>
         {({ loading, error, data }) => {
           if (loading) return <div>Loading...</div>;
           if (error) return <div>Error :(</div>;
-          return <ChakibooList data={data} />;
+          return <ChakibooListContainer data={data} />;
         }}
       </Query>
     );

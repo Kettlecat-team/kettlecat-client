@@ -7,48 +7,40 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-
+import Editor from "./pages/Editor";
 import Home from "./pages/Home";
 import "./App.css";
 import ChakibooCreator from "./pages/ChakibooCreator/ChakibooCreator";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
+import MyChakiboos from "./pages/MyChakiboos";
+import ChakibooView from "./pages/ChakibooView/ChakibooView";
 
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql",
   credentials: "include"
 });
 
-const styles = {
-  root: {
-    flexGrow: 1
-  },
-  flex: {
-    flex: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
-  }
-};
-
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleLogin = username => {
+    this.toggleLogin = userData => {
       this.setState(state => ({
         isLogged: true,
-        loggedUser: username
+        loggedUser: userData.username,
+        loggedUserID: userData.id
       }));
     };
 
     this.state = {
       isLogged: false,
       loggedUser: "",
+      loggedUserID: "",
       toggleLogin: this.toggleLogin
     };
   }
@@ -68,50 +60,53 @@ class App extends Component {
       }
     }).then(response => {
       if (response.ok === true) {
-        this.setState({ isLogged: false, loggedUser: "" });
+        this.setState({ isLogged: false, loggedUser: "", loggedUserID: "" });
       }
     });
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <div id="container">
         <LoginContext.Provider value={this.state}>
           <ApolloProvider client={client}>
             <Router>
               <div>
-                <div className={classes.root}>
+                <div>
                   <AppBar position="static">
                     <Toolbar>
-                      <Typography
-                        variant="title"
-                        color="inherit"
-                        className={classes.flex}
-                      >
+                      <Typography variant="title">
                         <Link to="/">Kettlecat</Link>
                       </Typography>
-                      <Button color="inherit">
-                                <Link to="/creator">Create</Link>
-                              </Button>
+
                       <LoginContext.Consumer>
-                        {({ isLogged, loggedUser }) =>
+                        {({ isLogged, loggedUser, loggedUserID }) =>
                           isLogged ? (
                             <React.Fragment>
+                              <Button color="inherit">
+                                <Link to="/creator">Create</Link>
+                              </Button>
+                              {/* <Button color="inherit">
+                                <Link to="/editor/5b5a33a8be2ddb00141732e8">
+                                  Edit Test
+                                </Link>
+                              </Button> */}
+                              <Button color="inherit">
+                                <Link to={`/mychakiboos/${loggedUserID}`}>
+                                  My Chakiboos
+                                </Link>
+                              </Button>
                               <Typography>logged as {loggedUser}</Typography>
-                              <Button
-                                color="inherit"
-                                onClick={this.handleLogout}
-                              >
+                              <Button onClick={this.handleLogout}>
                                 Logout
                               </Button>
                             </React.Fragment>
                           ) : (
                             <React.Fragment>
-                              <Button color="inherit">
+                              <Button>
                                 <Link to="/login">Login</Link>
                               </Button>
-                              <Button color="inherit">
+                              <Button>
                                 <Link to="/signup">Sign Up</Link>
                               </Button>
                             </React.Fragment>
@@ -127,6 +122,14 @@ class App extends Component {
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={SignUp} />
                   <Route exact path="/creator" component={ChakibooCreator} />
+                  <Route exact path="/editor/:id" component={Editor} />
+                  <Route exact path="/viewer/:id" component={ChakibooView} />
+                  <Route
+                    exact
+                    path="/mychakiboos/:id"
+                    component={MyChakiboos}
+                  />
+                  {/* <Route exact path="/editor" copmonent={Editor} /> */}
                 </Switch>
               </div>
             </Router>
@@ -137,4 +140,4 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles)(App);
+export default App;

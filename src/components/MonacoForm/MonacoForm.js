@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 /* import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -9,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import Monaco from '../Monaco';
 import TextField from '@material-ui/core/TextField'; */
 
-
 /* const parseTags = description => {
   const hashtagRegExp = /(^|\W)(#[a-z\d][\w-]*)/gi;
   description.match(hashtagRegExp).map(value => value.substr(2));
@@ -18,35 +19,34 @@ import TextField from '@material-ui/core/TextField'; */
 
 const MonacoForm = props => (
   <form onSubmit={props.handleSubmit}>
-    <div className ="form">
-      <label>
-        Title:
-        <input
-          type="text"
-          name="title"
-          value={props.title}
-          onChange={props.handleChange}
-        />
-      </label>
-      <label>
-        Description:
-        <input
-          type="text"
-          name="description"
-          value={props.description}
-          onChange={props.handleChange}
-        />
-      </label>
-      <div className="button">
-        <button
-          type="submit"
-        >
+    <div className="form">
+      <TextField
+        id="title"
+        name="title"
+        label="Title"
+        value={props.title}
+        onChange={props.handleChange}
+        disabled={props.readOnly}
+        margin="normal"
+      />
+      <TextField
+        id="description"
+        name="description"
+        label="Description"
+        value={props.description}
+        onChange={props.handleChange}
+        multiline
+        disabled={props.readOnly}
+        margin="normal"
+      />
+      {props.readOnly ? null : (
+        <Button variant="contained" type="submit" color="primary">
           Submit
-        </button>
-      </div>
+        </Button>
+      )}
     </div>
   </form>
-)
+);
 // class MonacoForm extends Component {
 //   constructor(props) {
 //     super(props);
@@ -64,7 +64,7 @@ const MonacoForm = props => (
 //     /* let tags = this.state.description;
 
 //     console.log(tags);  */
-    
+
 //     let value = event.target.value;
 //     const name = event.target.name;
 
@@ -74,19 +74,19 @@ const MonacoForm = props => (
 //   }
 //   handleSubmit(event) {
 //     event.preventDefault();
-    
+
 //     let descriptionFull = this.state.description;
 
 //     if (descriptionFull.indexOf('#') >=0) {
 //       let parsedTags = descriptionFull.match(/(^|\W)(#[a-z\d][\w-]*)/gi).map(value => value.substr(2));
 //       console.log(parsedTags);
 //     }
-   
+
 //     alert(
 //       "Title is: " +
 //         this.state.title +
 //         ". And the description is: " +
-//         this.state.description 
+//         this.state.description
 //     );
 //   }
 
