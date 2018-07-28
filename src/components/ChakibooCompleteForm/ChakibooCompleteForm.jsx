@@ -4,6 +4,7 @@ import MonacoForm from "../../components/MonacoForm";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import { Redirect } from "react-router-dom";
+import queries from "./../../graphQL/queries";
 
 const getData = id => {
   // Default options are marked with *
@@ -51,6 +52,15 @@ const CREATE_CHAKIBOO = gql`
       }
     ) {
       id
+      title
+      code
+      description
+      tags
+      language
+      author {
+        username
+        id
+      }
     }
   }
 `;
@@ -155,6 +165,19 @@ class ChakibooCompleteForm extends Component {
     return (
       <Mutation
         mutation={this.props.isCreation ? CREATE_CHAKIBOO : UPDATE_CHAKIBOO}
+        update={(cache, { data: { createChakiboo } }) => {
+          if (this.props.isCreation) {
+            const { chakiboos } = cache.readQuery({
+              query: queries.GET_CHAKIBOOS
+            });
+            console.log(chakiboos);
+            console.log(createChakiboo);
+            cache.writeQuery({
+              query: queries.GET_CHAKIBOOS,
+              data: { chakiboos: chakiboos.concat([createChakiboo]) }
+            });
+          }
+        }}
       >
         {(addChakiboo, { data, error }) => {
           return (
