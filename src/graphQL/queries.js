@@ -16,6 +16,22 @@ const queries = {
         }
       }
     }
+  `,
+  GET_BY_TAG: gql`
+    query getChakiboosByTag($tag: String) {
+      chakiboos(tag: $tag) {
+        id
+        title
+        description
+        code
+        tags
+        language
+        author {
+          username
+          id
+        }
+      }
+    }
   `
 };
 
