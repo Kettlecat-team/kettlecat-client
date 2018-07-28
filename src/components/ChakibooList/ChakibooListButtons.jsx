@@ -10,6 +10,8 @@ import IconButton from "@material-ui/core/IconButton";
 import { ThumbUp } from "@material-ui/icons";
 import LoginContext from "./../../contexts/LoginContext";
 import { Link } from "react-router-dom";
+import { gql } from "apollo-boost";
+import { Mutation } from "../../../node_modules/react-apollo";
 
 const styles = theme => ({
   button: {
@@ -26,14 +28,20 @@ const styles = theme => ({
   }
 });
 
+const FORK_CHAKIBOO = gql`
+  mutation forkChakiboo($id: String) {
+    forkChakiboo(id: $id) {
+      id
+    }
+  }
+`;
+
 function IconLabelButtons(props) {
   const { classes, chakibooID, authorID } = props;
   return (
     <LoginContext.Consumer>
       {({ isLogged, loggedUserID }) => {
         if (isLogged) {
-          console.log(loggedUserID);
-          console.log(authorID);
           if (loggedUserID === authorID) {
             return (
               <React.Fragment>
@@ -55,15 +63,24 @@ function IconLabelButtons(props) {
                   Delete
                   <DeleteIcon className={classes.rightIcon} />
                 </Button>
-
-                <Button
-                  variant="contained"
-                  color="default"
-                  className={classes.button}
+                <Mutation
+                  mutation={FORK_CHAKIBOO}
+                  variables={{ id: chakibooID }}
                 >
-                  Copy
-                  <CloudUploadIcon className={classes.rightIcon} />
-                </Button>
+                  {(forkChakiboo, { data, error }) => (
+                    <Button
+                      variant="contained"
+                      color="default"
+                      className={classes.button}
+                      onClick={() => {
+                        forkChakiboo({ variables: { id: chakibooID } });
+                      }}
+                    >
+                      Fork
+                      <CloudUploadIcon className={classes.rightIcon} />
+                    </Button>
+                  )}
+                </Mutation>
                 <IconButton>
                   <ThumbUp />
                 </IconButton>
@@ -72,14 +89,24 @@ function IconLabelButtons(props) {
           } else {
             return (
               <React.Fragment>
-                <Button
-                  variant="contained"
-                  color="default"
-                  className={classes.button}
+                <Mutation
+                  mutation={FORK_CHAKIBOO}
+                  variables={{ id: chakibooID }}
                 >
-                  Copy
-                  <CloudUploadIcon className={classes.rightIcon} />
-                </Button>
+                  {(forkChakiboo, { data, error }) => (
+                    <Button
+                      variant="contained"
+                      color="default"
+                      className={classes.button}
+                      onClick={() => {
+                        forkChakiboo({ variables: { id: chakibooID } });
+                      }}
+                    >
+                      Fork
+                      <CloudUploadIcon className={classes.rightIcon} />
+                    </Button>
+                  )}
+                </Mutation>
                 <IconButton>
                   <ThumbUp />
                 </IconButton>
