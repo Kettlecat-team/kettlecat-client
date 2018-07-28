@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import '../MonacoForm/MonacoForm.css';
 /* import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -28,6 +29,7 @@ const MonacoForm = props => (
         onChange={props.handleChange}
         disabled={props.readOnly}
         margin="normal"
+        className="title"
       />
       <TextField
         id="description"
@@ -38,9 +40,10 @@ const MonacoForm = props => (
         multiline
         disabled={props.readOnly}
         margin="normal"
+        className="description"
       />
       {props.readOnly ? null : (
-        <Button variant="contained" type="submit" color="primary">
+        <Button variant="contained" type="submit" color="primary" className="submitbutton">
           Submit
         </Button>
       )}

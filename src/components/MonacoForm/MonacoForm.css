@@ -1,13 +1,25 @@
-.container {
-    display: flex;
-    justify-content: center;
-};
-
-#cardContainer{
-    diplay: flex;
-    justify-content: center;
+.language {
+    margin-top: 10px !important;
+    margin-left: 10px !important;
 }
 
-.cardContent{
-    flex-direction: column;
+div.form {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+div.form .title {
+    margin-right: 10px;
+}
+
+div.form .description {
+    flex: 1 1 400px;
+    margin-right: 10px;
+}
+
+div.form .submitbutton {
+    margin-top: 15px;
 }
