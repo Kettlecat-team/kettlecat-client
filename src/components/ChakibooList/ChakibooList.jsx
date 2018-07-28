@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ChakibooListButtons from "./ChakibooListButtons";
 import Typography from "@material-ui/core/Typography";
+import HashtagDescription from "./../HashtagDescription";
 
 const styles = {
   card: {
@@ -36,7 +37,9 @@ const ChakibooList = props => {
           <Typography variant="headline" component="h2">
             {title}
           </Typography>
-          <Typography color="textSecondary">{description}</Typography>
+          <Typography color="textSecondary">
+            <HashtagDescription value={description} />
+          </Typography>
           <Typography color="textSecondary">By {author.username}</Typography>
         </CardContent>
         <CardActions>

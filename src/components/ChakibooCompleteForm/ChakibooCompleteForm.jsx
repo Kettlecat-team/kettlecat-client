@@ -170,8 +170,6 @@ class ChakibooCompleteForm extends Component {
             const { chakiboos } = cache.readQuery({
               query: queries.GET_CHAKIBOOS
             });
-            console.log(chakiboos);
-            console.log(createChakiboo);
             cache.writeQuery({
               query: queries.GET_CHAKIBOOS,
               data: { chakiboos: chakiboos.concat([createChakiboo]) }
