@@ -73,7 +73,7 @@ class App extends Component {
         <LoginContext.Provider value={this.state}>
           <ApolloProvider client={client}>
             <Router>
-              <div>
+              <div className="subContainer">
                 <div>
                   <AppBar position="static">
                     <Toolbar className="AppToolbar">
@@ -92,7 +92,7 @@ class App extends Component {
                               </Button>
                               <Button color="inherit">
                                 <Link to={`/mychakiboos/${loggedUserID}`}>
-                                  My Chakiboos
+                                  My Code
                                 </Link>
                               </Button>
                               <Typography>logged as {loggedUser}</Typography>
