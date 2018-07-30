@@ -32,15 +32,15 @@ const ChakibooList = props => {
 
   return chakiboos.map(({ title, description, author, id }) => (
     <Grid item xs={12} sm={4}>
-      <Card>
+      <Card className="card">
         <CardContent>
           <Typography variant="headline" component="h2">
             {title}
           </Typography>
-          <Typography color="textSecondary">
+          <Typography color="textSecondary" className="codeDescrip">
             <HashtagDescription value={description} />
           </Typography>
-          <Typography color="textSecondary">By {author.username}</Typography>
+          <Typography color="textSecondary" className="authorName">By {author.username}</Typography>
         </CardContent>
         <CardActions className="cardButtons">
           <ChakibooListButtons chakibooID={id} authorID={author.id}/>

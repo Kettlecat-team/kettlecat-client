@@ -56,6 +56,7 @@ function IconLabelButtons(props) {
                 <Link to={`/viewer/${chakibooID}`}>
                   <Button
                     variant="contained"
+                    color="secondary"
                     size="small"
                     className={classes.button}
                   >
@@ -100,7 +101,6 @@ function IconLabelButtons(props) {
                   {(deleteChakiboo, { data, error }) => (
                     <Button
                       variant="contained"
-                      color="secondary"
                       className={classes.button}
                       onClick={() => {
                         deleteChakiboo({ variables: { id: chakibooID } });
@@ -146,6 +146,7 @@ function IconLabelButtons(props) {
                       <Link to={`/viewer/${chakibooID}`}>
                         <Button
                           variant="contained"
+                          color="secondary"
                           size="small"
                           className={classes.button}
                         >
@@ -172,9 +173,9 @@ function IconLabelButtons(props) {
                     </React.Fragment>
                   )}
                 </Mutation>
-                <IconButton>
+                {/* <IconButton>
                   <ThumbUp />
-                </IconButton>
+                </IconButton> */}
               </React.Fragment>
             );
           }
@@ -183,6 +184,7 @@ function IconLabelButtons(props) {
             <Link to={`/viewer/${chakibooID}`}>
               <Button
                 variant="contained"
+                color="secondary"
                 size="small"
                 className={classes.button}
               >
