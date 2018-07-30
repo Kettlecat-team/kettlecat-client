@@ -1,28 +1,68 @@
-.App {
-  text-align: center;
+* {
+  font-family: "IBM Plex Sans", sans-serif !important;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.AppToolbar {
+  background: #444;
+  flex-wrap: wrap;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.AppToolbar a {
+  text-decoration: none;
 }
 
-.App-title {
-  font-size: 1.5em;
+.AppToolbar a h1,
+.AppToolbar button span,
+.AppToolbar button span a {
+  color: white !important;
+  flex: 1 0 auto;
 }
 
-.App-intro {
-  font-size: large;
+.AppToolbar p {
+  padding: 3px 8px;
+  color: black !important;
+  background: white;
+  border-radius: 13px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.AppToolbar a h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  font-family: "IBM Plex Sans", sans-serif;
+  text-transform: uppercase;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.CatLogo {
+  display: flex;
+  align-items: center;
+}
+
+.CatLogo .img {
+  width: 55px;
+  height: 50px;
+  margin-right: 8px;
+  background-image: url(./assets/logo-03-01.svg);
+  background-size: cover;
+}
+
+.subContainer {
+  min-height: 100vh;
+  background: #eee;
+}
+
+.cardButtons {
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 600px) {
+  .AppToolbar {
+    flex-direction: column;
+  }
 }

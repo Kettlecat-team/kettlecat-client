@@ -10,6 +10,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+
 import Editor from "./pages/Editor";
 import Home from "./pages/Home";
 import "./App.css";
@@ -19,6 +20,7 @@ import SignUp from "./pages/SignUp";
 import LoginContext from "./contexts/LoginContext";
 import MyChakiboos from "./pages/MyChakiboos";
 import ChakibooView from "./pages/ChakibooView/ChakibooView";
+import TagsFilter from "./pages/tagsFilter";
 
 const client = new ApolloClient({
   uri: "https://kettlecat-graphql.herokuapp.com/graphql",
@@ -71,13 +73,15 @@ class App extends Component {
         <LoginContext.Provider value={this.state}>
           <ApolloProvider client={client}>
             <Router>
-              <div>
+              <div className="subContainer">
                 <div>
                   <AppBar position="static">
-                    <Toolbar>
-                      <Typography variant="title">
-                        <Link to="/">Kettlecat</Link>
-                      </Typography>
+                    <Toolbar className="AppToolbar">
+                      <Link className="CatLogo" to="/">
+                        <div className="img"></div>
+                        <h1>Kettlecat</h1>
+                      </Link>
+                      <div className="spacer"></div>
 
                       <LoginContext.Consumer>
                         {({ isLogged, loggedUser, loggedUserID }) =>
@@ -86,14 +90,9 @@ class App extends Component {
                               <Button color="inherit">
                                 <Link to="/creator">Create</Link>
                               </Button>
-                              {/* <Button color="inherit">
-                                <Link to="/editor/5b5a33a8be2ddb00141732e8">
-                                  Edit Test
-                                </Link>
-                              </Button> */}
                               <Button color="inherit">
                                 <Link to={`/mychakiboos/${loggedUserID}`}>
-                                  My Chakiboos
+                                  My Code
                                 </Link>
                               </Button>
                               <Typography>logged as {loggedUser}</Typography>
@@ -124,6 +123,7 @@ class App extends Component {
                   <Route exact path="/creator" component={ChakibooCreator} />
                   <Route exact path="/editor/:id" component={Editor} />
                   <Route exact path="/viewer/:id" component={ChakibooView} />
+                  <Route exact path="/tag/:tag" component={TagsFilter} />
                   <Route
                     exact
                     path="/mychakiboos/:id"

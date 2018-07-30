@@ -25,7 +25,7 @@ const Monaco = props => {
         options={props.options}
       />
 
-      <FormControl disabled={props.readOnly}>
+      <FormControl disabled={props.readOnly} className="language">
         <InputLabel htmlFor="language">Language</InputLabel>
         <Select
           value={props.options.mode}

@@ -4,7 +4,7 @@ import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
 
 const GET_AUTHOR_CHAKIBOOS = gql`
-query fetchAuthorChakiboos($id: String){
+  query fetchAuthorChakiboos($id: String) {
     author(id: $id) {
       chakiboos {
         id
@@ -17,7 +17,6 @@ query fetchAuthorChakiboos($id: String){
       }
     }
   }
-
 `;
 
 class MyChakiboos extends Component {
@@ -29,7 +28,11 @@ class MyChakiboos extends Component {
 
   render() {
     return (
-      <Query query={GET_AUTHOR_CHAKIBOOS} variables={{ id: this.props.match.params.id }}>
+      <Query
+        query={GET_AUTHOR_CHAKIBOOS}
+        variables={{ id: this.props.match.params.id }}
+        pollInterval={2000}
+      >
         {({ loading, error, data }) => {
           if (loading) return <div>Loading...</div>;
           if (error) return <div>Error :(</div>;
@@ -39,6 +42,5 @@ class MyChakiboos extends Component {
     );
   }
 }
-
 
 export default MyChakiboos;

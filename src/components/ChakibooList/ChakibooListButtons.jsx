@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import { gql } from "apollo-boost";
 import { Mutation } from "../../../node_modules/react-apollo";
 
+import queries from "./../../graphQL/queries"
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
@@ -51,6 +53,21 @@ function IconLabelButtons(props) {
           if (loggedUserID === authorID) {
             return (
               <React.Fragment>
+                <Link to={`/viewer/${chakibooID}`}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    className={classes.button}
+                  >
+                    View
+                    <ViewIcon
+                      className={classNames(
+                        classes.leftIcon,
+                        classes.iconSmall
+                      )}
+                    />
+                  </Button>
+                </Link>
                 <Link to={`/editor/${chakibooID}`}>
                   <Button
                     variant="contained"
@@ -69,6 +86,16 @@ function IconLabelButtons(props) {
                 <Mutation
                   mutation={DELETE_CHAKIBOO}
                   variables={{ id: chakibooID }}
+                  // update={(cache, { data: { deleteChakiboo } }) => {
+                  //   const { chakiboos } = cache.readQuery({
+                  //     query: queries.GET_CHAKIBOOS
+                  //   });
+                  //   console.log(chakiboos);
+                    // cache.writeQuery({
+                    //   query: queries.GET_CHAKIBOOS,
+                    //   data: { chakiboos: chakiboos.concat([createChakiboo]) }
+                    // });
+                  // }}
                 >
                   {(deleteChakiboo, { data, error }) => (
                     <Button
@@ -115,17 +142,34 @@ function IconLabelButtons(props) {
                   variables={{ id: chakibooID }}
                 >
                   {(forkChakiboo, { data, error }) => (
-                    <Button
-                      variant="contained"
-                      color="default"
-                      className={classes.button}
-                      onClick={() => {
-                        forkChakiboo({ variables: { id: chakibooID } });
-                      }}
-                    >
-                      Fork
-                      <CloudUploadIcon className={classes.rightIcon} />
-                    </Button>
+                    <React.Fragment>
+                      <Link to={`/viewer/${chakibooID}`}>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          className={classes.button}
+                        >
+                          View
+                          <ViewIcon
+                            className={classNames(
+                              classes.leftIcon,
+                              classes.iconSmall
+                            )}
+                          />
+                        </Button>
+                      </Link>
+                      <Button
+                        variant="contained"
+                        color="default"
+                        className={classes.button}
+                        onClick={() => {
+                          forkChakiboo({ variables: { id: chakibooID } });
+                        }}
+                      >
+                        Fork
+                        <CloudUploadIcon className={classes.rightIcon} />
+                      </Button>
+                    </React.Fragment>
                   )}
                 </Mutation>
                 <IconButton>
@@ -136,14 +180,18 @@ function IconLabelButtons(props) {
           }
         } else {
           return (
-            <Button variant="contained" size="small" className={classes.button}>
-              <Link to={`/viewer/${chakibooID}`}>
+            <Link to={`/viewer/${chakibooID}`}>
+              <Button
+                variant="contained"
+                size="small"
+                className={classes.button}
+              >
                 View
                 <ViewIcon
                   className={classNames(classes.leftIcon, classes.iconSmall)}
                 />
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           );
         }
       }}
